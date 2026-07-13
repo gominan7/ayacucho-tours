@@ -50,6 +50,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  // Restrict access to /users for Vendedores
+  const isUsersRoute = pathname === "/users" || pathname.startsWith("/users/");
+  if (isUsersRoute && user) {
+    const role = user.app_metadata?.role;
+    if (role === "Vendedor") {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+  }
+
   // Redirect to /dashboard if trying to access /login with an active session
   if (pathname === "/login" && user) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
