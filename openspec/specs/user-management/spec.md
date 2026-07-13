@@ -1,5 +1,8 @@
-## ADDED Requirements
+# user-management Specification
 
+## Purpose
+TBD - created by archiving change rf-002-gestion-usuarios. Update Purpose after archive.
+## Requirements
 ### Requirement: Listar usuarios del sistema
 El sistema MUST mostrar al Administrador una tabla paginada con todos los usuarios registrados, incluyendo su correo electrónico, rol y estado (BR-026, BR-027).
 
@@ -61,3 +64,4 @@ El sistema MUST permitir al Administrador cambiar el estado de un usuario entre 
 #### Scenario: Intento de eliminación física
 - **WHEN** el Administrador intenta eliminar físicamente un usuario
 - **THEN** el sistema no ofrece dicha opción en la interfaz (el botón de eliminar no debe existir)
+
