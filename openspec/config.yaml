@@ -59,4 +59,4 @@ rules:
     - Each task should have a single responsibility.
     - Tasks should be implementation-oriented and verifiable.
 
-Always ask for clarification if the documentation is ambiguous instead of making assumptions.
+# Always ask for clarification if the documentation is ambiguous instead of making assumptions.

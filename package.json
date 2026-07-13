@@ -1,0 +1,30 @@
+{
+  "name": "ayacucho-tours",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AYACUCHO TOURS - Tourism Management System",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "dev": "npm run dev --workspace=web",
+    "build": "npm run build --workspace=web",
+    "lint": "npm run lint --workspace=web",
+    "format": "npm run format --workspace=web",
+    "format:check": "npm run format:check --workspace=web"
+  },
+  "lint-staged": {
+    "apps/web/**/*.{js,jsx,ts,tsx,json,css,md}": [
+      "npm run format --workspace=web"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gominan7/ayacucho-tours.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gominan7/ayacucho-tours/issues"
+  },
+  "homepage": "https://github.com/gominan7/ayacucho-tours#readme"
+}
