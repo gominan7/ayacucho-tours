@@ -1,0 +1,62 @@
+schema: spec-driven
+
+context: |
+  Project: AYACUCHO TOURS
+
+  Develop this project using Spec-Driven Development (OpenSpec).
+
+  Before creating any Proposal, Specs, Design or Tasks, review the official project documentation.
+
+  Official documentation:
+
+  - docs/tech/tech-stack.md
+  - docs/product/product-vision.md
+  - docs/product/business-rules.md
+  - docs/architecture/system-architecture.md
+  - docs/database/database-design.md
+  - docs/ui/design-system.md
+  - docs/project-glossary.md
+  - docs/ai/ai-context.md
+  - docs/ai/openspec-workflow.md
+
+  Development Guidelines:
+
+  - Follow the approved Tech Stack.
+  - Respect all Business Rules.
+  - Maintain the official System Architecture.
+  - Use Feature-Based Architecture.
+  - Use Next.js App Router.
+  - Use TypeScript (strict mode).
+  - Use Supabase as the backend platform.
+  - Use shadcn/ui components.
+  - Prioritize reusable components.
+  - Prefer Server Components over Client Components.
+  - Keep the code modular, readable and maintainable.
+  - Do not introduce technologies outside the approved stack.
+  - Do not implement functionality outside the active OpenSpec Change.
+  - Ask for clarification if documentation is ambiguous.
+
+rules:
+  proposal:
+    - Focus on business value.
+    - Clearly define scope.
+    - Include non-goals when appropriate.
+    - Do not include implementation details.
+
+  specs:
+    - Write acceptance criteria using Gherkin.
+    - Reference Business Rules whenever applicable.
+    - Keep requirements testable and unambiguous.
+
+  design:
+    - Follow the official architecture.
+    - Reuse existing project patterns.
+    - Minimize unnecessary complexity.
+    - Keep design consistent with the approved Tech Stack.
+
+  tasks:
+    - Break implementation into small, independent tasks.
+    - Each task should have a single responsibility.
+    - Tasks should be implementation-oriented and verifiable.
+
+Always ask for clarification if the documentation is ambiguous instead of making assumptions.
