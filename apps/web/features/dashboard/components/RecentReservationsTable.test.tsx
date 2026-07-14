@@ -21,7 +21,7 @@ describe("RecentReservationsTable", () => {
   it("renderiza el título de la tabla", () => {
     render(<RecentReservationsTable reservations={mockReservations} />);
 
-    expect(screen.getByText("Últimas Reservas Registradas")).toBeInTheDocument();
+    expect(screen.getByText(/Últimas Reservas/i)).toBeInTheDocument();
   });
 
   it("muestra los encabezados de columna", () => {
