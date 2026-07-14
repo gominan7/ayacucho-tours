@@ -72,6 +72,18 @@ export default function Navbar() {
                 Clientes
               </Link>
             )}
+            {isSalesOrAdmin && (
+              <Link
+                href="/reservations"
+                className={`text-sm font-medium transition-colors ${
+                  pathname.startsWith("/reservations")
+                    ? "text-zinc-900 font-semibold"
+                    : "text-zinc-500 hover:text-zinc-900"
+                }`}
+              >
+                Reservas
+              </Link>
+            )}
             {isAdmin && (
               <Link
                 href="/tour-packages"
