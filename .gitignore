@@ -32,3 +32,17 @@ Thumbs.db
 # OpenSpec
 # ===========================
 openspec/changes/archive/
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Next.js
+.next/
+out/
+
+# Build
+dist/
+build/
+
+coverage/
