@@ -52,22 +52,20 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/dashboard"
-              className={`text-sm font-medium transition-colors ${
-                pathname === "/dashboard"
+              className={`text-sm font-medium transition-colors ${pathname === "/dashboard"
                   ? "text-zinc-900 font-semibold"
                   : "text-zinc-500 hover:text-zinc-900"
-              }`}
+                }`}
             >
               Dashboard
             </Link>
             {isSalesOrAdmin && (
               <Link
                 href="/clients"
-                className={`text-sm font-medium transition-colors ${
-                  pathname.startsWith("/clients")
+                className={`text-sm font-medium transition-colors ${pathname.startsWith("/clients")
                     ? "text-zinc-900 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900"
-                }`}
+                  }`}
               >
                 Clientes
               </Link>
@@ -75,11 +73,10 @@ export default function Navbar() {
             {isSalesOrAdmin && (
               <Link
                 href="/reservations"
-                className={`text-sm font-medium transition-colors ${
-                  pathname.startsWith("/reservations")
+                className={`text-sm font-medium transition-colors ${pathname.startsWith("/reservations")
                     ? "text-zinc-900 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900"
-                }`}
+                  }`}
               >
                 Reservas
               </Link>
@@ -87,23 +84,32 @@ export default function Navbar() {
             {isSalesOrAdmin && (
               <Link
                 href="/sales"
-                className={`text-sm font-medium transition-colors ${
-                  pathname.startsWith("/sales")
+                className={`text-sm font-medium transition-colors ${pathname.startsWith("/sales")
                     ? "text-zinc-900 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900"
-                }`}
+                  }`}
               >
                 Ventas
+              </Link>
+            )}
+            {isSalesOrAdmin && (
+              <Link
+                href="/payments"
+                className={`text-sm font-medium transition-colors ${pathname.startsWith("/payments")
+                    ? "text-zinc-900 font-semibold"
+                    : "text-zinc-500 hover:text-zinc-900"
+                  }`}
+              >
+                Pagos
               </Link>
             )}
             {isAdmin && (
               <Link
                 href="/tour-packages"
-                className={`text-sm font-medium transition-colors ${
-                  pathname.startsWith("/tour-packages")
+                className={`text-sm font-medium transition-colors ${pathname.startsWith("/tour-packages")
                     ? "text-zinc-900 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900"
-                }`}
+                  }`}
               >
                 Paquetes
               </Link>
@@ -111,11 +117,10 @@ export default function Navbar() {
             {isAdmin && (
               <Link
                 href="/users"
-                className={`text-sm font-medium transition-colors ${
-                  pathname.startsWith("/users")
+                className={`text-sm font-medium transition-colors ${pathname.startsWith("/users")
                     ? "text-zinc-900 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900"
-                }`}
+                  }`}
               >
                 Usuarios
               </Link>
@@ -131,7 +136,7 @@ export default function Navbar() {
               <span>{userEmail}</span>
             </div>
           )}
-          
+
           <Button
             variant="outline"
             size="sm"
