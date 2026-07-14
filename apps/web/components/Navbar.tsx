@@ -12,6 +12,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSalesOrAdmin, setIsSalesOrAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,7 +20,9 @@ export default function Navbar() {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUserEmail(user.email || null);
-        setIsAdmin(user.app_metadata?.role === "Administrador");
+        const role = user.app_metadata?.role;
+        setIsAdmin(role === "Administrador");
+        setIsSalesOrAdmin(role === "Administrador" || role === "Vendedor");
       }
       setLoading(false);
     }
@@ -57,6 +60,18 @@ export default function Navbar() {
             >
               Dashboard
             </Link>
+            {isSalesOrAdmin && (
+              <Link
+                href="/clients"
+                className={`text-sm font-medium transition-colors ${
+                  pathname.startsWith("/clients")
+                    ? "text-zinc-900 font-semibold"
+                    : "text-zinc-500 hover:text-zinc-900"
+                }`}
+              >
+                Clientes
+              </Link>
+            )}
             {isAdmin && (
               <Link
                 href="/users"
