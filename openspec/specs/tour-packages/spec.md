@@ -1,5 +1,8 @@
-## ADDED Requirements
+# tour-packages Specification
 
+## Purpose
+TBD - created by archiving change rf-004-gestion-paquetes. Update Purpose after archive.
+## Requirements
 ### Requirement: Acceso Autorizado al Módulo de Paquetes Turísticos
 El sistema SHALL permitir el acceso al listado, creación, edición y búsqueda de paquetes únicamente a los usuarios con rol de Administrador.
 
@@ -43,3 +46,4 @@ El sistema SHALL mostrar la lista de paquetes registrados en una tabla ordenada 
 #### Scenario: Búsqueda por nombre o destino
 - **WHEN** el usuario ingresa un término de búsqueda (ej. nombre del paquete o destino) en la barra de búsqueda del listado
 - **THEN** el sistema SHALL filtrar la lista en tiempo real para mostrar únicamente los paquetes cuyo nombre o destino coincida parcialmente con el valor ingresado.
+
