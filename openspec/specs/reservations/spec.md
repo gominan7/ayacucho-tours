@@ -1,7 +1,10 @@
-## ADDED Requirements
+# reservations Specification
 
+## Purpose
+TBD - created by archiving change rf-005-gestion-reservas. Update Purpose after archive.
+## Requirements
 ### Requirement: Acceso Autorizado al Módulo de Reservas
-El acceso a la gestión de reservas de paquetes turísticos estará limitado a los usuarios autenticados con los roles de Administrador y Vendedor (BR-026, BR-027, BR-028).
+El sistema SHALL permitir el acceso a la gestión de reservas de paquetes turísticos únicamente a los usuarios autenticados con los roles de Administrador y Vendedor.
 
 #### Scenario: Acceso permitido para Administrador y Vendedor
 - **WHEN** un usuario con rol de "Administrador" o "Vendedor" intenta acceder a la ruta `/reservations`
@@ -25,9 +28,11 @@ El sistema SHALL permitir registrar una reserva asociando un cliente y un paquet
 - **THEN** el sistema SHALL rechazar la solicitud, mostrar mensajes de error específicos en el formulario y no persistir ningún dato.
 
 ---
-### Requirement: Listado y Búsqueda de Reservas
-El sistema debe listar las reservas en una tabla ordenada cronológicamente (creación descendente) y permitir la búsqueda reactiva en tiempo real por el nombre del cliente o el nombre del paquete turístico.
 
-#### Scenario: Filtrado reactivo de reservas
+### Requirement: Listado y Búsqueda de Reservas
+El sistema SHALL listar las reservas y permitir la búsqueda por nombre del cliente o del paquete turístico.
+
+#### Scenario: Filtrado de reservas
 - **WHEN** el usuario ingresa un fragmento de texto en el buscador de reservas
-- **THEN** el sistema SHALL filtrar reactivamente y mostrar únicamente las reservas donde el nombre del cliente o el nombre del paquete turístico coincida parcialmente con el término ingresado.
+- **THEN** el sistema SHALL filtrar y mostrar únicamente las reservas donde el nombre del cliente o el nombre del paquete turístico coincida parcialmente con el término ingresado.
+
