@@ -1,5 +1,8 @@
-## ADDED Requirements
+# dashboard Specification
 
+## Purpose
+TBD - created by archiving change rf-008-dashboard. Update Purpose after archive.
+## Requirements
 ### Requirement: Tarjetas de Resumen General
 El sistema SHALL mostrar un conjunto de tarjetas resumen que presenten los totales cuantitativos de las entidades principales del sistema: Clientes, Paquetes Turísticos, Reservas, Ventas y Pagos.
 
@@ -26,3 +29,4 @@ El sistema SHALL listar en una tabla de consulta rápida las 5 reservas más rec
 #### Scenario: Visualización de últimas reservas
 - **WHEN** el usuario visualiza la pantalla del Dashboard `/dashboard`
 - **THEN** el sistema SHALL mostrar una lista ordenada cronológicamente de forma descendente con las últimas 5 reservas, detallando el nombre del cliente, el nombre del paquete turístico y la fecha de la reserva.
+
