@@ -1,5 +1,8 @@
-## ADDED Requirements
+# client-management Specification
 
+## Purpose
+TBD - created by archiving change rf-003-gestion-clientes. Update Purpose after archive.
+## Requirements
 ### Requirement: Acceso Autorizado al Módulo de Clientes
 El sistema SHALL permitir el acceso al listado, creación, edición y búsqueda de clientes únicamente a los usuarios con rol de Administrador o Vendedor.
 
@@ -35,6 +38,4 @@ El sistema SHALL permitir editar la información de un cliente existente manteni
 #### Scenario: Edición exitosa de datos
 - **WHEN** el usuario modifica los campos (nombre, correo o teléfono) de un cliente con valores válidos y guarda los cambios
 - **THEN** el sistema SHALL guardar la información actualizada del cliente, actualizar su fecha de modificación y mostrar un mensaje de éxito.
-
-
 
