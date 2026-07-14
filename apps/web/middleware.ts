@@ -50,9 +50,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // Restrict access to /users for Vendedores
-  const isUsersRoute = pathname === "/users" || pathname.startsWith("/users/");
-  if (isUsersRoute && user) {
+  // Restrict access to /users and /tour-packages for Vendedores
+  const isRestrictedRouteForSeller =
+    pathname === "/users" ||
+    pathname.startsWith("/users/") ||
+    pathname === "/tour-packages" ||
+    pathname.startsWith("/tour-packages/");
+  if (isRestrictedRouteForSeller && user) {
     const role = user.app_metadata?.role;
     if (role === "Vendedor") {
       return NextResponse.redirect(new URL("/dashboard", request.url));

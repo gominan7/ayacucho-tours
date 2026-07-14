@@ -74,6 +74,18 @@ export default function Navbar() {
             )}
             {isAdmin && (
               <Link
+                href="/tour-packages"
+                className={`text-sm font-medium transition-colors ${
+                  pathname.startsWith("/tour-packages")
+                    ? "text-zinc-900 font-semibold"
+                    : "text-zinc-500 hover:text-zinc-900"
+                }`}
+              >
+                Paquetes
+              </Link>
+            )}
+            {isAdmin && (
+              <Link
                 href="/users"
                 className={`text-sm font-medium transition-colors ${
                   pathname.startsWith("/users")
