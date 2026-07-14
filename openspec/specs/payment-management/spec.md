@@ -1,5 +1,8 @@
-## ADDED Requirements
+# payment-management Specification
 
+## Purpose
+TBD - created by archiving change rf-007-gestion-pagos. Update Purpose after archive.
+## Requirements
 ### Requirement: Acceso Autorizado al Módulo de Pagos
 El sistema SHALL permitir el acceso a la gestión de pagos únicamente a los usuarios autenticados con los roles de Administrador y Vendedor.
 
