@@ -107,4 +107,34 @@ describe("ClientTable", () => {
       screen.getByText("No se encontraron clientes que coincidan con la búsqueda.")
     ).toBeInTheDocument();
   });
+
+  it("muestra error si falla al cambiar estado", async () => {
+    const { toggleClientStatus } = await import("../actions/toggleClientStatus");
+    (toggleClientStatus as any).mockResolvedValueOnce({ success: false, error: "Error de validación" });
+
+    render(<ClientTable clients={mockClients} />);
+
+    const buttons = screen.getAllByRole("button", { name: "Menú de acciones" });
+    fireEvent.click(buttons[0]);
+    
+    const toggleButton = screen.getByText("Inactivar");
+    fireEvent.click(toggleButton);
+
+    expect(await screen.findByText("Error de validación")).toBeInTheDocument();
+  });
+
+  it("muestra error si ocurre una excepción al cambiar estado", async () => {
+    const { toggleClientStatus } = await import("../actions/toggleClientStatus");
+    (toggleClientStatus as any).mockRejectedValueOnce(new Error("Error de conexión"));
+
+    render(<ClientTable clients={mockClients} />);
+
+    const buttons = screen.getAllByRole("button", { name: "Menú de acciones" });
+    fireEvent.click(buttons[0]);
+    
+    const toggleButton = screen.getByText("Inactivar");
+    fireEvent.click(toggleButton);
+
+    expect(await screen.findByText("Error de conexión")).toBeInTheDocument();
+  });
 });

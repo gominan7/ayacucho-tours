@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { PackageForm } from "./PackageForm";
 
 vi.mock("next/link", () => ({
@@ -45,5 +45,35 @@ describe("PackageForm", () => {
 
     expect(screen.getByText("Cancelar")).toBeInTheDocument();
     expect(screen.getByText("Registrar Paquete")).toBeInTheDocument();
+  });
+
+  it("muestra error si falla el submit", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al crear paquete" });
+    render(
+      <PackageForm 
+        mode="edit" 
+        initialValues={{ nombre: "T", destino: "D", precio: 100 }} 
+        onSubmit={mockOnSubmitFail} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Paquete" }));
+
+    expect(await screen.findByText("Error al crear paquete")).toBeInTheDocument();
+  });
+
+  it("muestra error genérico si ocurre una excepción", async () => {
+    const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Error inesperado"));
+    render(
+      <PackageForm 
+        mode="edit" 
+        initialValues={{ nombre: "T", destino: "D", precio: 100 }} 
+        onSubmit={mockOnSubmitThrow} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Paquete" }));
+
+    expect(await screen.findByText("Error inesperado")).toBeInTheDocument();
   });
 });

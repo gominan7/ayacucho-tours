@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { UserTable } from "./UserTable";
 import type { UserRow } from "../types/user";
 
@@ -56,5 +56,36 @@ describe("UserTable", () => {
     render(<UserTable users={[]} />);
 
     expect(screen.getByText("No hay usuarios registrados")).toBeInTheDocument();
+  });
+
+  it("muestra error si falla al cambiar estado del usuario", async () => {
+    const { toggleUserStatus } = await import("../actions/toggleUserStatus");
+    (toggleUserStatus as any).mockResolvedValueOnce({ success: false, error: "Error al cambiar estado" });
+
+    render(<UserTable users={mockUsers} />);
+
+    // Click the toggle button for the first user
+    const buttons = screen.getAllByRole("button", { name: "Menú de acciones" });
+    fireEvent.click(buttons[0]);
+    
+    const toggleButton = screen.getByText("Inactivar");
+    fireEvent.click(toggleButton);
+
+    expect(await screen.findByText("Error al cambiar estado")).toBeInTheDocument();
+  });
+
+  it("muestra error inesperado si toggle lanza excepción", async () => {
+    const { toggleUserStatus } = await import("../actions/toggleUserStatus");
+    (toggleUserStatus as any).mockRejectedValueOnce(new Error("Error de conexión"));
+
+    render(<UserTable users={mockUsers} />);
+
+    const buttons = screen.getAllByRole("button", { name: "Menú de acciones" });
+    fireEvent.click(buttons[0]);
+    
+    const toggleButton = screen.getByText("Inactivar");
+    fireEvent.click(toggleButton);
+
+    expect(await screen.findByText("Error de conexión")).toBeInTheDocument();
   });
 });

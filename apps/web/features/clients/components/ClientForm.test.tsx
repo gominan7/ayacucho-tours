@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { ClientForm } from "./ClientForm";
 
 // Mock next/link
@@ -53,5 +53,35 @@ describe("ClientForm", () => {
     render(<ClientForm mode="edit" onSubmit={mockOnSubmit} />);
 
     expect(screen.getByText("Actualizar Cliente")).toBeInTheDocument();
+  });
+
+  it("muestra error si el submit falla", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al registrar cliente" });
+    render(
+      <ClientForm 
+        mode="edit" 
+        initialValues={{ nombre_completo: "A", tipo_documento: "DNI", nro_documento: "1", email: "a@a.com", telefono: "1" }} 
+        onSubmit={mockOnSubmitFail} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Cliente" }));
+
+    expect(await screen.findByText("Error al registrar cliente")).toBeInTheDocument();
+  });
+
+  it("muestra error si ocurre una excepción", async () => {
+    const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Error de conexión"));
+    render(
+      <ClientForm 
+        mode="edit" 
+        initialValues={{ nombre_completo: "A", tipo_documento: "DNI", nro_documento: "1", email: "a@a.com", telefono: "1" }} 
+        onSubmit={mockOnSubmitThrow} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Cliente" }));
+
+    expect(await screen.findByText("Error de conexión")).toBeInTheDocument();
   });
 });

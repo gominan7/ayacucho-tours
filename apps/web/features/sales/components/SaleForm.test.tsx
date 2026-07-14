@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { SaleForm } from "./SaleForm";
 
 vi.mock("next/link", () => ({
@@ -8,7 +8,7 @@ vi.mock("next/link", () => ({
 
 const mockSalesList = [
   {
-    id: "res-1",
+    id: "123e4567-e89b-12d3-a456-426614174002",
     fecha_reserva: "2026-07-10",
     clientes: { nombre_completo: "Juan Pérez" },
     paquetes: { nombre: "Tour Ayacucho", precio: 350 },
@@ -34,7 +34,7 @@ describe("SaleForm", () => {
         mode="edit"
         reservationsList={mockSalesList}
         initialValues={{
-          reserva_id: "res-1",
+          reserva_id: "123e4567-e89b-12d3-a456-426614174002",
           fecha_venta: "2026-07-14",
           monto_total: 500,
           metodo_pago: "Tarjeta",
@@ -55,5 +55,37 @@ describe("SaleForm", () => {
 
     expect(screen.getByText("Cancelar")).toBeInTheDocument();
     expect(screen.getByText("Guardar Venta")).toBeInTheDocument();
+  });
+
+  it("muestra error si el submit falla", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al guardar venta" });
+    render(
+      <SaleForm 
+        mode="edit" 
+        reservationsList={mockSalesList} 
+        initialValues={{ reserva_id: "123e4567-e89b-12d3-a456-426614174002", fecha_venta: "2026-07-15", monto_total: 100, metodo_pago: "Efectivo" }} 
+        onSubmit={mockOnSubmitFail} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Guardar Venta" }));
+
+    expect(await screen.findByText("Error al guardar venta")).toBeInTheDocument();
+  });
+
+  it("muestra error genérico si ocurre excepción", async () => {
+    const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Error de conexión"));
+    render(
+      <SaleForm 
+        mode="edit" 
+        reservationsList={mockSalesList} 
+        initialValues={{ reserva_id: "123e4567-e89b-12d3-a456-426614174002", fecha_venta: "2026-07-15", monto_total: 100, metodo_pago: "Efectivo" }} 
+        onSubmit={mockOnSubmitThrow} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Guardar Venta" }));
+
+    expect(await screen.findByText("Error de conexión")).toBeInTheDocument();
   });
 });

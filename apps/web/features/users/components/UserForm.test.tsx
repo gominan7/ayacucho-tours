@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { UserForm } from "./UserForm";
 
 vi.mock("next/link", () => ({
@@ -41,5 +41,53 @@ describe("UserForm", () => {
 
     expect(screen.getByText("Cancelar")).toBeInTheDocument();
     expect(screen.getByText("Registrar Usuario")).toBeInTheDocument();
+  });
+
+  it("muestra mensaje de error si el submit falla", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al crear" });
+    render(
+      <UserForm 
+        mode="edit" 
+        roles={mockRoles} 
+        initialValues={{ email: "a@a.com", rol_id: "role-1" }} 
+        onSubmit={mockOnSubmitFail} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Usuario" }));
+
+    expect(await screen.findByText("Error al crear")).toBeInTheDocument();
+  });
+
+  it("muestra mensaje de error por defecto si falla sin mensaje", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false });
+    render(
+      <UserForm 
+        mode="edit" 
+        roles={mockRoles} 
+        initialValues={{ email: "a@a.com", rol_id: "role-1" }} 
+        onSubmit={mockOnSubmitFail} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Usuario" }));
+
+    expect(await screen.findByText("Ocurrió un error al procesar el formulario.")).toBeInTheDocument();
+  });
+
+  it("muestra mensaje de error si ocurre una excepción", async () => {
+    const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Error inesperado"));
+    render(
+      <UserForm 
+        mode="edit" 
+        roles={mockRoles} 
+        initialValues={{ email: "a@a.com", rol_id: "role-1" }} 
+        onSubmit={mockOnSubmitThrow} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Usuario" }));
+
+    expect(await screen.findByText("Error inesperado")).toBeInTheDocument();
   });
 });

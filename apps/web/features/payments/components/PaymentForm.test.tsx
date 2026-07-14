@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { PaymentForm } from "./PaymentForm";
 
 vi.mock("next/link", () => ({
@@ -8,7 +8,7 @@ vi.mock("next/link", () => ({
 
 const mockSalesList = [
   {
-    id: "sale-1",
+    id: "123e4567-e89b-12d3-a456-426614174003",
     fecha_venta: "2026-07-10",
     monto_total: 500,
     cliente_nombre: "Juan Pérez",
@@ -35,7 +35,7 @@ describe("PaymentForm", () => {
         mode="edit"
         salesList={mockSalesList}
         initialValues={{
-          venta_id: "sale-1",
+          venta_id: "123e4567-e89b-12d3-a456-426614174003",
           fecha_pago: "2026-07-14",
           monto_pagado: 200,
           metodo_pago: "Transferencia",
@@ -56,5 +56,37 @@ describe("PaymentForm", () => {
 
     expect(screen.getByText("Cancelar")).toBeInTheDocument();
     expect(screen.getByText("Guardar Pago")).toBeInTheDocument();
+  });
+
+  it("muestra error si el submit falla", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al guardar pago" });
+    render(
+      <PaymentForm 
+        mode="edit" 
+        salesList={mockSalesList} 
+        initialValues={{ venta_id: "123e4567-e89b-12d3-a456-426614174003", fecha_pago: "2026-07-15", monto_pagado: 100, metodo_pago: "Efectivo" }} 
+        onSubmit={mockOnSubmitFail} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Guardar Pago" }));
+
+    expect(await screen.findByText("Error al guardar pago")).toBeInTheDocument();
+  });
+
+  it("muestra error genérico si ocurre excepción", async () => {
+    const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Error inesperado"));
+    render(
+      <PaymentForm 
+        mode="edit" 
+        salesList={mockSalesList} 
+        initialValues={{ venta_id: "123e4567-e89b-12d3-a456-426614174003", fecha_pago: "2026-07-15", monto_pagado: 100, metodo_pago: "Efectivo" }} 
+        onSubmit={mockOnSubmitThrow} 
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Guardar Pago" }));
+
+    expect(await screen.findByText("Error inesperado")).toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { ReservationForm } from "./ReservationForm";
 
 vi.mock("next/link", () => ({
@@ -7,10 +7,10 @@ vi.mock("next/link", () => ({
 }));
 
 const mockClients = [
-  { id: "cli-1", nombre_completo: "Juan Pérez" },
+  { id: "123e4567-e89b-12d3-a456-426614174000", nombre_completo: "Juan Pérez" },
 ];
 const mockPackages = [
-  { id: "pkg-1", nombre: "Tour Ayacucho", precio: 250 },
+  { id: "123e4567-e89b-12d3-a456-426614174001", nombre: "Tour Ayacucho", precio: 250 },
 ];
 
 describe("ReservationForm", () => {
@@ -38,8 +38,8 @@ describe("ReservationForm", () => {
         clientsList={mockClients}
         packagesList={mockPackages}
         initialValues={{
-          cliente_id: "cli-1",
-          paquete_id: "pkg-1",
+          cliente_id: "123e4567-e89b-12d3-a456-426614174000",
+          paquete_id: "123e4567-e89b-12d3-a456-426614174001",
           fecha_reserva: "2026-07-14",
           cantidad_personas: 4,
           estado: "Confirmada",
@@ -65,5 +65,39 @@ describe("ReservationForm", () => {
 
     expect(screen.getByText("Cancelar")).toBeInTheDocument();
     expect(screen.getByText("Registrar Reserva")).toBeInTheDocument();
+  });
+
+  it("muestra error si falla el submit", async () => {
+    const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al registrar reserva" });
+    render(
+      <ReservationForm
+        mode="edit"
+        clientsList={mockClients}
+        packagesList={mockPackages}
+        initialValues={{ cliente_id: "123e4567-e89b-12d3-a456-426614174000", paquete_id: "123e4567-e89b-12d3-a456-426614174001", fecha_reserva: "2026-07-15", cantidad_personas: 2, estado: "Pendiente" }}
+        onSubmit={mockOnSubmitFail}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Reserva" }));
+
+    expect(await screen.findByText("Error al registrar reserva")).toBeInTheDocument();
+  });
+
+  it("muestra error genérico si ocurre excepción", async () => {
+    const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Fallo de red"));
+    render(
+      <ReservationForm
+        mode="edit"
+        clientsList={mockClients}
+        packagesList={mockPackages}
+        initialValues={{ cliente_id: "123e4567-e89b-12d3-a456-426614174000", paquete_id: "123e4567-e89b-12d3-a456-426614174001", fecha_reserva: "2026-07-15", cantidad_personas: 2, estado: "Pendiente" }}
+        onSubmit={mockOnSubmitThrow}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Actualizar Reserva" }));
+
+    expect(await screen.findByText("Fallo de red")).toBeInTheDocument();
   });
 });
