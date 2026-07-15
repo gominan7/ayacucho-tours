@@ -1,6 +1,6 @@
 # Product Vision
 
-## Sistema de Gestión de Ventas para la Agencia Turística DM GO TRAVEL
+## Sistema de Gestión de Ventas para la Agencia Turística AYACUCHO TOURS
 
 **Versión:** 1.0
 **Fecha:** 2026
@@ -11,7 +11,7 @@
 
 # 1. Información General
 
-El presente documento describe la visión del producto para el desarrollo del Sistema de Gestión de Ventas de la agencia turística DM GO TRAVEL. Este documento establece la dirección del proyecto, define el propósito del sistema, identifica a los principales interesados y delimita el alcance funcional que será desarrollado durante la primera versión del producto (Producto Mínimo Viable - MVP).
+El presente documento describe la visión del producto para el desarrollo del Sistema de Gestión de Ventas de la agencia turística AYACUCHO TOURS. Este documento establece la dirección del proyecto, define el propósito del sistema, identifica a los principales interesados y delimita el alcance funcional que será desarrollado durante la primera versión del producto (Producto Mínimo Viable - MVP).
 
 La información contenida en este documento servirá como base para la elaboración del Product Requirements Document (PRD), las historias de usuario, las reglas de negocio y las especificaciones técnicas administradas mediante OpenSpec.
 
@@ -19,7 +19,7 @@ La información contenida en este documento servirá como base para la elaboraci
 
 # 2. Introducción
 
-DM GO TRAVEL es una agencia turística ubicada en la ciudad de Ayacucho que ofrece paquetes turísticos hacia diversos destinos de la región y del país. Actualmente, la empresa administra gran parte de sus operaciones comerciales utilizando hojas de cálculo de Microsoft Excel, redes sociales y aplicaciones de mensajería instantánea.
+AYACUCHO TOURS es una agencia turística ubicada en la ciudad de Ayacucho que ofrece paquetes turísticos hacia diversos destinos de la región y del país. Actualmente, la empresa administra gran parte de sus operaciones comerciales utilizando hojas de cálculo de Microsoft Excel, redes sociales y aplicaciones de mensajería instantánea.
 
 Si bien estas herramientas permiten gestionar parcialmente la información, presentan limitaciones para controlar de manera eficiente los procesos relacionados con clientes, reservas, ventas y pagos. La información se encuentra distribuida en diferentes medios, dificultando su actualización, consulta y seguimiento oportuno.
 
@@ -52,7 +52,7 @@ La empresa presenta diversas limitaciones en la gestión de sus operaciones come
 
 ## Objetivo General
 
-Desarrollar un Sistema de Gestión de Ventas basado en Spec-Driven Development (SDD) que permita optimizar los procesos comerciales de la agencia turística DM GO TRAVEL.
+Desarrollar un Sistema de Gestión de Ventas basado en Spec-Driven Development (SDD) que permita optimizar los procesos comerciales de la agencia turística AYACUCHO TOURS.
 
 ## Objetivos Específicos
 
