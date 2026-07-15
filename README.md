@@ -29,7 +29,7 @@ Ante esta situación, se plantea el desarrollo de un Sistema de Gestión de Vent
 
 # 3. Visión del Producto
 
-Desarrollar una plataforma web moderna que permita gestionar de forma integrada los procesos comerciales de la agencia turística DM GO TRAVEL, facilitando la administración de clientes, paquetes turísticos, reservas, ventas y pagos mediante una solución tecnológica segura, escalable y fácil de utilizar.
+Desarrollar una plataforma web moderna que permita gestionar de forma integrada los procesos comerciales de la agencia turística AYACUCHO TOURS, facilitando la administración de clientes, paquetes turísticos, reservas, ventas y pagos mediante una solución tecnológica segura, escalable y fácil de utilizar.
 
 El sistema será desarrollado siguiendo la metodología Spec-Driven Development (SDD), garantizando que cada funcionalidad sea definida mediante especificaciones claras antes de su implementación, promoviendo la trazabilidad entre los requerimientos, el desarrollo y las pruebas del software.
 
@@ -69,7 +69,7 @@ Desarrollar un Sistema de Gestión de Ventas basado en Spec-Driven Development (
 
 ## Stakeholder Principal
 
-* Gerente General de DM GO TRAVEL.
+* Gerente General de AYACUCHO TOURS.
 
 ## Stakeholders Internos
 
