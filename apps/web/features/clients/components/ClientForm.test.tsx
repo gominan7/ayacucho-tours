@@ -58,10 +58,10 @@ describe("ClientForm", () => {
   it("muestra error si el submit falla", async () => {
     const mockOnSubmitFail = vi.fn().mockResolvedValue({ success: false, error: "Error al registrar cliente" });
     render(
-      <ClientForm 
-        mode="edit" 
-        initialValues={{ nombre_completo: "A", tipo_documento: "DNI", nro_documento: "1", email: "a@a.com", telefono: "1" }} 
-        onSubmit={mockOnSubmitFail} 
+      <ClientForm
+        mode="edit"
+        initialValues={{ nombre_completo: "A", tipo_documento: "DNI", nro_documento: "1", email: "a@a.com", telefono: "1" }}
+        onSubmit={mockOnSubmitFail}
       />
     );
 
@@ -73,10 +73,10 @@ describe("ClientForm", () => {
   it("muestra error si ocurre una excepción", async () => {
     const mockOnSubmitThrow = vi.fn().mockRejectedValue(new Error("Error de conexión"));
     render(
-      <ClientForm 
-        mode="edit" 
-        initialValues={{ nombre_completo: "A", tipo_documento: "DNI", nro_documento: "1", email: "a@a.com", telefono: "1" }} 
-        onSubmit={mockOnSubmitThrow} 
+      <ClientForm
+        mode="edit"
+        initialValues={{ nombre_completo: "A", tipo_documento: "DNI", nro_documento: "1", email: "a@a.com", telefono: "1" }}
+        onSubmit={mockOnSubmitThrow}
       />
     );
 
